@@ -24,7 +24,7 @@ def refresh_token():
     f.close()
     client_id = client_details['web']['client_id']
     client_secret = client_details['web']['client_secret']
-    refresh_token = client_details['refresh_token']
+    refresh_token = client_details['web']['refresh_token']
 
     result = oauth2.main(["oauth2.py", 
         f"--client_id={client_id}", 
