@@ -12,6 +12,7 @@ from email.utils import make_msgid
 def get_verification_token():
     f = open("./atefics/client.json", 'r')
     client_details = json.loads(f.read())
+    f.close()
     client_id = client_details['web']['client_id']
     client_secret = client_details['web']['client_secret']
 
@@ -45,7 +46,6 @@ def run_optics_atef():
 
     # run checkout (comparison)
     top_level_result = asyncio.run(file.compare())
-    print(top_level_result.severity)
 
     recipients = ['nrw@slac.stanford.edu', 'lclsoptics@gmail.com']
     msg = EmailMessage()    
