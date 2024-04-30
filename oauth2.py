@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Vendored and modified from <link>: 
+# Vendored and modified from https://github.com/google/gmail-oauth2-tools/: 
 #
 # Copyright 2012 Google Inc.
 #
@@ -75,7 +75,6 @@ import ssl
 import sys
 import urllib.parse
 import urllib.request
-from email.message import EmailMessage
 
 
 def SetupOptionParser():
