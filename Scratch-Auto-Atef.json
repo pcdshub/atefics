@@ -1,0 +1,356 @@
+{
+  "version": 0,
+  "root": {
+    "name": "RIX Beamline",
+    "description": null,
+    "tags": null,
+    "configs": [
+      {
+        "PVConfiguration": {
+          "name": "MR2K2 FLAT",
+          "description": null,
+          "tags": null,
+          "by_pv": {
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagTime_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Time",
+                  "description": "Maximum allowable duration outside of maximum position lag value in seconds.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 0.02,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagVal_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Monitoring Val",
+                  "description": "Maximum magnitude of position lag in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 0.1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMin_RBV": [
+              {
+                "Equals": {
+                  "name": "X PLC Soft Limit Min",
+                  "description": "Minimum commandable position of the axis in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": -12.5,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMax_RBV": [
+              {
+                "Equals": {
+                  "name": "X PLC Soft Limit Max",
+                  "description": "Maximum commandable position of the axis in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 12.5,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncOffset_RBV": [
+              {
+                "Equals": {
+                  "name": "X Encoder Offset",
+                  "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 30.3574,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncScaling_RBV": [
+              {
+                "Equals": {
+                  "name": "X Enc Scale",
+                  "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 5e-06,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Mon Enabled",
+                  "description": "Enable/Disable state of Position Lag Monitor.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMaxEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Max PLC Limit Enabled",
+                  "description": null,
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMinEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Min PLC Limit Enabled",
+                  "description": " Enable/Disable state of controller static minimum limit",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ]
+          },
+          "shared": []
+        }
+      },
+      {
+        "PVConfiguration": {
+          "name": "MR3K2 KBH",
+          "description": null,
+          "tags": null,
+          "by_pv": {
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagTime_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Time",
+                  "description": "Maximum allowable duration outside of maximum position lag value in seconds.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 0.02,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagVal_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Monitoring Val",
+                  "description": "Maximum magnitude of position lag in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 0.1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMin_RBV": [
+              {
+                "Equals": {
+                  "name": "X PLC Soft Limit Min",
+                  "description": "Minimum commandable position of the axis in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": -12.5,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMax_RBV": [
+              {
+                "Equals": {
+                  "name": "X PLC Soft Limit Max",
+                  "description": "Maximum commandable position of the axis in EU.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 12.5,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncOffset_RBV": [
+              {
+                "Equals": {
+                  "name": "X Encoder Offset",
+                  "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 30.3574,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncScaling_RBV": [
+              {
+                "Equals": {
+                  "name": "X Enc Scale",
+                  "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 5e-06,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Pos Lag Mon Enabled",
+                  "description": "Enable/Disable state of Position Lag Monitor.",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMaxEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Max PLC Limit Enabled",
+                  "description": null,
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ],
+            "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMinEn_RBV": [
+              {
+                "Equals": {
+                  "name": "X Min PLC Limit Enabled",
+                  "description": " Enable/Disable state of controller static minimum limit",
+                  "invert": false,
+                  "reduce_period": null,
+                  "reduce_method": "average",
+                  "string": null,
+                  "severity_on_failure": 2,
+                  "if_disconnected": 2,
+                  "value_dynamic": null,
+                  "value": 1,
+                  "rtol": null,
+                  "atol": null
+                }
+              }
+            ]
+          },
+          "shared": []
+        }
+      }
+    ],
+    "values": {},
+    "mode": "all"
+  }
+}
