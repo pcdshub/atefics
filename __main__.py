@@ -1,3 +1,4 @@
+import sys
 import smtplib, ssl
 import json
 import apischema
@@ -8,6 +9,28 @@ from atef.enums import Severity
 import oauth2
 from email.message import EmailMessage
 from email.utils import make_msgid
+import optparse
+
+"""Performs an ATEF check given a config file and sends a corresponding
+email to a list of recepients. 
+
+"""
+def RequireOptions(options, *args):
+  missing = [arg for arg in args if getattr(options, arg) is None]
+  if missing:
+    print('Missing options: %s' % ' '.join(missing))
+    sys.exit(-1)
+
+def SetupOptionParser():
+    parser = optparse.OptionParser(usage=__doc__)
+    parser.add_option('--run_atefics',
+                    action='store_true',
+                    dest="run_atefics",
+                    help='run an atef check on a configuratin file')
+    parser.add_option('--atef_config_file',
+                    dest='config_file',
+                    help='config file to check')
+    return parser
 
 def get_verification_token():
     f = open("./atefics/client.json", 'r')
@@ -34,9 +57,9 @@ def refresh_token():
     return result['access_token']    
 
 
-def run_optics_atef():
+def run_optics_atef(config_file):
     # load (checkout) config file of choice
-    fn = './atefics/PLC-Limits-Prototype.json'
+    fn = './atefics/checkouts/PLC-Limits-Prototype.json'
     with open(fn, 'r') as fd:
         serialized = json.load(fd)
     deser = apischema.deserialize(ConfigurationFile, serialized)
@@ -90,4 +113,16 @@ def send_email(msg=None):
     smtp_conn.quit()
     return
 
-run_optics_atef()
+def main(argv):
+    options_parser = SetupOptionParser()
+    (options, args) = options_parser.parse_args()
+
+    if options.run_atefics:
+        RequireOptions(options, 'config_file')
+        run_optics_atef(options.config_file)
+    else:
+        options_parser.print_help()
+        return
+
+main(sys.argv)
+#run_optics_atef()
