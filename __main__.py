@@ -1,4 +1,4 @@
-import sys
+import sys, os.path
 import smtplib, ssl
 import json
 import apischema
@@ -10,6 +10,8 @@ import oauth2
 from email.message import EmailMessage
 from email.utils import make_msgid
 import optparse
+
+client_id_path = "./atefics/client.json"
 
 """Performs an ATEF check given a config file and sends a corresponding
 email to a list of recepients. 
@@ -29,13 +31,12 @@ def SetupOptionParser():
                     help='run an atef check on a configuratin file')
     parser.add_option('--atef_config_file',
                     dest='config_file',
-                    help='config file to check')
+                    help='absolute path or filename in checkouts')
     return parser
 
 def get_verification_token():
-    f = open("./atefics/client.json", 'r')
-    client_details = json.loads(f.read())
-    f.close()
+    with open(client_id_path, 'r') as fd:
+        client_details = json.loads(fd.read())
     client_id = client_details['web']['client_id']
     client_secret = client_details['web']['client_secret']
 
@@ -43,9 +44,8 @@ def get_verification_token():
         f"--client_id={client_id}", f"--client_secret={client_secret}"])
 
 def refresh_token():
-    f = open("./atefics/client.json", 'r')
-    client_details = json.loads(f.read())
-    f.close()
+    with open(client_id_path, 'r') as fd:
+        client_details = json.loads(fd.read())
     client_id = client_details['web']['client_id']
     client_secret = client_details['web']['client_secret']
     refresh_token = client_details['web']['refresh_token']
@@ -58,8 +58,15 @@ def refresh_token():
 
 
 def run_optics_atef(config_file):
-    # load (checkout) config file of choice
-    fn = './atefics/checkouts/PLC-Limits-Prototype.json'
+    fn = ''
+    if os.path.isfile(config_file):
+        fn = config_file
+    elif os.path.isfile("./atefics/checkouts/" + config_file):
+        fn = "./atefics/checkouts/" + config_file
+    else:
+        print(f"{config_file} does not exist")
+        sys.exit(-1)
+
     with open(fn, 'r') as fd:
         serialized = json.load(fd)
     deser = apischema.deserialize(ConfigurationFile, serialized)
