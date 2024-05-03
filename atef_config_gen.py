@@ -17,9 +17,6 @@ class OpticsHard(BaseInterface, Device):
     max_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMaxEn_RBV')
     min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV')
 
-beamline = "RIX"
-devices = ["MR1K1:BEND:MMS:PITCH", "MR2K2:FLAT:MMS:PITCH", "MR3K2:KBH:MMS:PITCH", "MR4K2:KBV:MMS:PITCH"] 
-
 
 def addEqualComparison(file, config_name, axis_name, pv, value, name="", description="", overwrite=False):
     """Given an ATEF ConfiurationFile, find the specified PVConfiguration,
@@ -60,6 +57,7 @@ def addEqualComparison(file, config_name, axis_name, pv, value, name="", descrip
     
     with open("scratch.json", "w") as fd:
         fd.write(json.dumps(configFile))
+
 
 def addCurrentAxisParameters(file, mirror, base_pv_axis, axis, overwrite=False):
     hardstop_config = OpticsHard(base_pv_axis, name='')
