@@ -1,8 +1,8 @@
-from atef.config import ConfigurationFile, ConfigurationGroup, Configuration, PVConfiguration
+from atef.config import ConfigurationFile, ConfigurationGroup, PVConfiguration
 from atef.check import Equals
 import json
 from ophyd import Component as Cpt                                                                                                    
-from ophyd import Device, EpicsSignal, EpicsSignalRO                                                                                  
+from ophyd import Device, EpicsSignal 
 from pcdsdevices.interface import BaseInterface  
 import apischema
 
@@ -120,14 +120,20 @@ file = ConfigurationFile()
 file.root.name = "RIX Beamline"
 
 # add config group for each mirror
-for mirror_name in ['MR2K2 FLAT', 'MR3K2 KBH']:
+for mirror_name in ['MR1K4 SOMS', 'MR2K2 FLAT', 'MR3K2 KBH']:
     file.root.configs.append(ConfigurationGroup(name=mirror_name))
 
-#addCurrentAxisParameters("scratch.json", "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
+addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:XUP", "XUP", True) 
+addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:YUP", "YUP", True) 
+addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:PITCH", "Pitch", True) 
+
+addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:X", "X", True) 
+addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
 addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
-#addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
-# addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:X", "X", True) 
-# addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:Y", "Y", True) 
+
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:X", "X", True) 
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:Y", "Y", True) 
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:PITCH", "Pitch", True) 
 
     
 with open("scratch.json", "w") as fd:
