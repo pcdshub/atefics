@@ -1,10 +1,11 @@
-from atef.config import ConfigurationFile, ConfigurationGroup, Configuration, PVConfiguration
+from atef.config import ConfigurationFile, ConfigurationGroup, PVConfiguration
 from atef.check import Equals
 import json
 from ophyd import Component as Cpt                                                                                                    
-from ophyd import Device, EpicsSignal, EpicsSignalRO                                                                                  
+from ophyd import Device, EpicsSignal 
 from pcdsdevices.interface import BaseInterface  
 import apischema
+import hashlib
 
 class OpticsHard(BaseInterface, Device):                                                                                                    
     pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV')                                                                      
@@ -18,7 +19,8 @@ class OpticsHard(BaseInterface, Device):
     min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV')
 
 
-def addEqualComparison(file, config_name, axis_name, pv, value, name="", description="", overwrite=False):
+def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
+                       value, name="", description="", overwrite=False):
     """Given an ATEF ConfiurationFile, find the specified PVConfiguration,
     create and insert a new Equal comparison into the PVConfiguration.
 
@@ -29,37 +31,37 @@ def addEqualComparison(file, config_name, axis_name, pv, value, name="", descrip
         pv (String): The PV name used to conduct the comparison. 
         value (Any): The value to compare to.
     """
-    comparison = apischema.serialize(Equals(value=value, name=name, description=description))
-
-    with open("scratch.json", "r") as fd:
-        configFile = json.loads(fd.read())
-
     foundConfig = False
-    for config in configFile['root']['configs']:
-        if config['ConfigurationGroup']['name'] == config_name:
+    if config_name not in [cfg.name for cfg in file.root.configs]:
+        # no matching ConfigurationGroup
+        return
+
+    for config in file.root.configs:
+        if config.name == config_name:
             print("found Configuration Group")
             foundConfig = True
-            for axis in config['ConfigurationGroup']['configs']:
-                print(axis['PVConfiguration']['name'])
-                
-                if axis['PVConfiguration']['name'] == axis_name:
-                    by_pv = axis['PVConfiguration']['by_pv']
-                    print("found Axis Configuration")
+            if axis_name not in [cfg.name for cfg in config.configs]:
+                # no PV Configuration, need to create one
+                config.configs.append(PVConfiguration(name=axis_name))
 
+            for axis in config.configs:
+                print(axis.name)
+                
+                if axis.name == axis_name:
+                    by_pv = axis.by_pv
+                    print("found Axis Configuration")
+                    new_comp = Equals(name=name, description=description, value=value)
                     if pv in by_pv and overwrite:
-                        del by_pv[pv]
-                        by_pv[pv] = [{"Equals": comparison}]
+                        by_pv[pv] = [new_comp]
                     elif pv not in by_pv:
-                        by_pv[pv] = [{"Equals": comparison}]
+                        by_pv[pv] = [new_comp]
                     break
         if foundConfig:
             break
     
-    with open("scratch.json", "w") as fd:
-        fd.write(json.dumps(configFile))
 
-
-def addCurrentAxisParameters(file, mirror, base_pv_axis, axis, overwrite=False):
+def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis, overwrite=False):
+    """ Add a new PVConfiguration in the ConfigurationGroup with name `mirror` """
     hardstop_config = OpticsHard(base_pv_axis, name='')
     signals = hardstop_config.get_instantiated_signals()
     for signal in signals:
@@ -89,7 +91,7 @@ def addCurrentAxisParameters(file, mirror, base_pv_axis, axis, overwrite=False):
 
         elif signal[1].name == "_enc_offset":
             name = axis + " Encoder Offset"
-            description = "Encoder scaling numerator / denominator in EU/COUNT."
+            description = "Encoder Offset converted into actual position units."
             value = hardstop_config.enc_offset.get()
             pv = hardstop_config.enc_offset.pvname
         elif signal[1].name == "_enc_scale":
@@ -114,8 +116,31 @@ def addCurrentAxisParameters(file, mirror, base_pv_axis, axis, overwrite=False):
             pv = hardstop_config.min_plc_limit_enabled.pvname
         addEqualComparison(file, mirror, axis, pv, value, name, description, overwrite)
 
-#addCurrentAxisParameters("scratch.json", "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
-addCurrentAxisParameters("scratch.json", "MR2K2 FLAT", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
-#addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
-addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:X", "X", True) 
-addCurrentAxisParameters("scratch.json", "MR3K2 KBH", "MR2K2:FLAT:MMS:Y", "Y", True) 
+# grab base config file
+file = ConfigurationFile()
+file.root.name = "RIX Beamline"
+
+# add config group for each mirror
+for mirror_name in ['SP1K1 MONO', 'MR1K1 BEND', 'MR2K2 FLAT', 'MR3K2 KBH']:
+    file.root.configs.append(ConfigurationGroup(name=mirror_name))
+
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_PI", "G_PI", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_H", "G_H", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_PI", "M_PI", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_H", "M_H", True) 
+
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:XUP", "XUP", True) 
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:YUP", "YUP", True) 
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:PITCH", "Pitch", True) 
+
+addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:X", "X", True) 
+addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
+addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
+
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:X", "X", True) 
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:Y", "Y", True) 
+addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:PITCH", "Pitch", True) 
+
+    
+with open("scratch.json", "w") as fd:
+    json.dump(apischema.serialize(ConfigurationFile, file), fd, indent=4)
