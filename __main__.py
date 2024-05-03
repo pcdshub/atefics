@@ -132,4 +132,3 @@ def main(argv):
         return
 
 main(sys.argv)
-#run_optics_atef()
