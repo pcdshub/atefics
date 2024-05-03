@@ -90,7 +90,7 @@ def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis
 
         elif signal[1].name == "_enc_offset":
             name = axis + " Encoder Offset"
-            description = "Encoder scaling numerator / denominator in EU/COUNT."
+            description = "Encoder Offset converted into actual position units."
             value = hardstop_config.enc_offset.get()
             pv = hardstop_config.enc_offset.pvname
         elif signal[1].name == "_enc_scale":
@@ -120,12 +120,17 @@ file = ConfigurationFile()
 file.root.name = "RIX Beamline"
 
 # add config group for each mirror
-for mirror_name in ['MR1K4 SOMS', 'MR2K2 FLAT', 'MR3K2 KBH']:
+for mirror_name in ['MR1K1 BEND', 'MR2K2 FLAT', 'MR3K2 KBH']:
     file.root.configs.append(ConfigurationGroup(name=mirror_name))
 
-addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:XUP", "XUP", True) 
-addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:YUP", "YUP", True) 
-addCurrentAxisParameters(file, "MR1K4 SOMS", "MR1K4:SOMS:MMS:PITCH", "Pitch", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_PI", "G_PI", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_H", "G_H", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_PI", "M_PI", True) 
+addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_H", "M_H", True) 
+
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:XUP", "XUP", True) 
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:YUP", "YUP", True) 
+addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:PITCH", "Pitch", True) 
 
 addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:X", "X", True) 
 addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
