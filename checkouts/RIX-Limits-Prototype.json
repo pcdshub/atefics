@@ -7,6 +7,533 @@
         "configs": [
             {
                 "ConfigurationGroup": {
+                    "name": "MR1K1 BEND",
+                    "description": null,
+                    "tags": null,
+                    "configs": [
+                        {
+                            "PVConfiguration": {
+                                "name": "XUP",
+                                "description": null,
+                                "tags": null,
+                                "by_pv": {
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:PosLagTime_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Pos Lag Time",
+                                                "description": "Maximum allowable duration outside of maximum position lag value in seconds.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.2,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:PosLagVal_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Pos Lag Monitoring Val",
+                                                "description": "Maximum magnitude of position lag in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 75.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:SLimMin_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP PLC Soft Limit Min",
+                                                "description": "Minimum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -12000.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:SLimMax_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP PLC Soft Limit Max",
+                                                "description": "Maximum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 12000.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:EncOffset_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Encoder Offset",
+                                                "description": "Encoder Offset converted into actual position units.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -19831.295,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:EncScaling_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Enc Scale",
+                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.001,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:PosLagEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Pos Lag Mon Enabled",
+                                                "description": "Enable/Disable state of Position Lag Monitor.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:SLimMaxEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Max PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static maximum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:XUP:PLC:AxisPar:SLimMinEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "XUP Min PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static minimum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ]
+                                },
+                                "shared": []
+                            }
+                        },
+                        {
+                            "PVConfiguration": {
+                                "name": "YUP",
+                                "description": null,
+                                "tags": null,
+                                "by_pv": {
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:PosLagTime_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Pos Lag Time",
+                                                "description": "Maximum allowable duration outside of maximum position lag value in seconds.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.2,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:PosLagVal_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Pos Lag Monitoring Val",
+                                                "description": "Maximum magnitude of position lag in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 30.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:SLimMin_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP PLC Soft Limit Min",
+                                                "description": "Minimum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -18500.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:SLimMax_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP PLC Soft Limit Max",
+                                                "description": "Maximum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 2114.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:EncOffset_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Encoder Offset",
+                                                "description": "Encoder Offset converted into actual position units.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -31911.458,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:EncScaling_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Enc Scale",
+                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.001,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:PosLagEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Pos Lag Mon Enabled",
+                                                "description": "Enable/Disable state of Position Lag Monitor.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:SLimMaxEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Max PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static maximum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:YUP:PLC:AxisPar:SLimMinEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "YUP Min PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static minimum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ]
+                                },
+                                "shared": []
+                            }
+                        },
+                        {
+                            "PVConfiguration": {
+                                "name": "Pitch",
+                                "description": null,
+                                "tags": null,
+                                "by_pv": {
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:PosLagTime_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Pos Lag Time",
+                                                "description": "Maximum allowable duration outside of maximum position lag value in seconds.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.2,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:PosLagVal_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Pos Lag Monitoring Val",
+                                                "description": "Maximum magnitude of position lag in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 10.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:SLimMin_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch PLC Soft Limit Min",
+                                                "description": "Minimum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -50.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:SLimMax_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch PLC Soft Limit Max",
+                                                "description": "Maximum commandable position of the axis in EU.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 300.0,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:EncOffset_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Encoder Offset",
+                                                "description": "Encoder Offset converted into actual position units.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": -24484.38252,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:EncScaling_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Enc Scale",
+                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 0.00244,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:PosLagEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Pos Lag Mon Enabled",
+                                                "description": "Enable/Disable state of Position Lag Monitor.",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:SLimMaxEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Max PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static maximum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ],
+                                    "MR1K1:BEND:MMS:PITCH:PLC:AxisPar:SLimMinEn_RBV": [
+                                        {
+                                            "Equals": {
+                                                "name": "Pitch Min PLC Limit Enabled",
+                                                "description": "Enable/Disable state of controller static minimum limit",
+                                                "invert": false,
+                                                "reduce_period": null,
+                                                "reduce_method": "average",
+                                                "string": null,
+                                                "severity_on_failure": 2,
+                                                "if_disconnected": 2,
+                                                "value_dynamic": null,
+                                                "value": 1,
+                                                "rtol": null,
+                                                "atol": null
+                                            }
+                                        }
+                                    ]
+                                },
+                                "shared": []
+                            }
+                        }
+                    ],
+                    "values": {},
+                    "mode": "all"
+                }
+            },
+            {
+                "ConfigurationGroup": {
                     "name": "MR2K2 FLAT",
                     "description": null,
                     "tags": null,
@@ -93,7 +620,7 @@
                                         {
                                             "Equals": {
                                                 "name": "X Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -147,7 +674,7 @@
                                         {
                                             "Equals": {
                                                 "name": "X Max PLC Limit Enabled",
-                                                "description": null,
+                                                "description": "Enable/Disable state of controller static maximum limit",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -165,7 +692,7 @@
                                         {
                                             "Equals": {
                                                 "name": "X Min PLC Limit Enabled",
-                                                "description": " Enable/Disable state of controller static minimum limit",
+                                                "description": "Enable/Disable state of controller static minimum limit",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -265,7 +792,7 @@
                                         {
                                             "Equals": {
                                                 "name": "Y Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -437,7 +964,7 @@
                                         {
                                             "Equals": {
                                                 "name": "Pitch Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -544,7 +1071,7 @@
                                 "description": null,
                                 "tags": null,
                                 "by_pv": {
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagTime_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:PosLagTime_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Pos Lag Time",
@@ -562,7 +1089,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagVal_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:PosLagVal_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Pos Lag Monitoring Val",
@@ -580,7 +1107,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMin_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:SLimMin_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X PLC Soft Limit Min",
@@ -592,13 +1119,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": -12.5,
+                                                "value": -1.0,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMax_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:SLimMax_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X PLC Soft Limit Max",
@@ -610,17 +1137,17 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 12.5,
+                                                "value": 1.2,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncOffset_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:EncOffset_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -628,13 +1155,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 30.3574,
+                                                "value": -29.756,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:EncScaling_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:EncScaling_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Enc Scale",
@@ -652,7 +1179,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:PosLagEn_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:PosLagEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Pos Lag Mon Enabled",
@@ -670,7 +1197,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMaxEn_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:SLimMaxEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Max PLC Limit Enabled",
@@ -688,7 +1215,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:X:PLC:AxisPar:SLimMinEn_RBV": [
+                                    "MR3K2:KBH:MMS:X:PLC:AxisPar:SLimMinEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "X Min PLC Limit Enabled",
@@ -716,7 +1243,7 @@
                                 "description": null,
                                 "tags": null,
                                 "by_pv": {
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:PosLagTime_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:PosLagTime_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Pos Lag Time",
@@ -734,7 +1261,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:PosLagVal_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:PosLagVal_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Pos Lag Monitoring Val",
@@ -746,13 +1273,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 0.1,
+                                                "value": 0.15,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:SLimMin_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:SLimMin_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y PLC Soft Limit Min",
@@ -764,13 +1291,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": -2.3,
+                                                "value": -12.5,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:SLimMax_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:SLimMax_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y PLC Soft Limit Max",
@@ -782,17 +1309,17 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 2.3,
+                                                "value": 6.8,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:EncOffset_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:EncOffset_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -800,13 +1327,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": -29.8773,
+                                                "value": -29.286,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:EncScaling_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:EncScaling_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Enc Scale",
@@ -824,7 +1351,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:PosLagEn_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:PosLagEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Pos Lag Mon Enabled",
@@ -842,7 +1369,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:SLimMaxEn_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:SLimMaxEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Max PLC Limit Enabled",
@@ -860,7 +1387,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:Y:PLC:AxisPar:SLimMinEn_RBV": [
+                                    "MR3K2:KBH:MMS:Y:PLC:AxisPar:SLimMinEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Y Min PLC Limit Enabled",
@@ -888,7 +1415,7 @@
                                 "description": null,
                                 "tags": null,
                                 "by_pv": {
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:PosLagTime_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:PosLagTime_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Pos Lag Time",
@@ -906,7 +1433,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:PosLagVal_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:PosLagVal_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Pos Lag Monitoring Val",
@@ -918,13 +1445,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 10.0,
+                                                "value": 5.0,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:SLimMin_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:SLimMin_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch PLC Soft Limit Min",
@@ -936,13 +1463,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": -917.0,
+                                                "value": -1430.0,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:SLimMax_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:SLimMax_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch PLC Soft Limit Max",
@@ -954,17 +1481,17 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 915.0,
+                                                "value": 230.0,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:EncOffset_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:EncOffset_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Encoder Offset",
-                                                "description": "Encoder scaling numerator / denominator in EU/COUNT.",
+                                                "description": "Encoder Offset converted into actual position units.",
                                                 "invert": false,
                                                 "reduce_period": null,
                                                 "reduce_method": "average",
@@ -972,13 +1499,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": -130197.25,
+                                                "value": -209396.0,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:EncScaling_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:EncScaling_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Enc Scale",
@@ -990,13 +1517,13 @@
                                                 "severity_on_failure": 2,
                                                 "if_disconnected": 2,
                                                 "value_dynamic": null,
-                                                "value": 0.0025826446,
+                                                "value": 0.005236,
                                                 "rtol": null,
                                                 "atol": null
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:PosLagEn_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:PosLagEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Pos Lag Mon Enabled",
@@ -1014,7 +1541,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:SLimMaxEn_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:SLimMaxEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Max PLC Limit Enabled",
@@ -1032,7 +1559,7 @@
                                             }
                                         }
                                     ],
-                                    "MR2K2:FLAT:MMS:PITCH:PLC:AxisPar:SLimMinEn_RBV": [
+                                    "MR3K2:KBH:MMS:PITCH:PLC:AxisPar:SLimMinEn_RBV": [
                                         {
                                             "Equals": {
                                                 "name": "Pitch Min PLC Limit Enabled",
