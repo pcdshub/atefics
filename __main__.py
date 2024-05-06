@@ -79,7 +79,7 @@ def refresh_token():
 def run_optics_atef(config_file):
     fn = FilePathUtil(config_file)
 
-    recipients = ['nrw@slac.stanford.edu', 'awallace@slac.stanford.edu', 'aaprinz@slac.stanford.edu']
+    recipients = ['nrw@slac.stanford.edu', 'awallace@slac.stanford.edu']
     msg = EmailMessage()    
     msg['From'] = "lclsoptics@gmail.com"
     msg['to'] = ", ".join(recipients)

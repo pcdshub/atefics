@@ -6,17 +6,17 @@ from ophyd import Device, EpicsSignal
 from pcdsdevices.interface import BaseInterface  
 import apischema
 
-class OpticsHard(BaseInterface, Device):                                                                                                    
-    pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV')                                                                      
-    pos_lag_mon_val = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagVal_RBV')     
-    plc_soft_limit_min = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMin_RBV' )
-    plc_soft_limit_max = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMax_RBV')
-    enc_offset = Cpt(EpicsSignal, ':PLC:AxisPar:EncOffset_RBV')
-    enc_scale = Cpt(EpicsSignal, ':PLC:AxisPar:EncScaling_RBV')
-    pos_lag_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagEn_RBV')
-    max_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMaxEn_RBV')
-    min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV')
 
+class OpticsHard(BaseInterface, Device):                                                                                                    
+    pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV', doc="Maximum allowable duration outside of maximum position lag value in seconds.")
+    pos_lag_mon_val = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagVal_RBV', doc="Maximum magnitude of position lag in EU.")     
+    plc_soft_limit_min = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMin_RBV', doc="Minimum commandable position of the axis in EU." )
+    plc_soft_limit_max = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMax_RBV', doc="Maximum commandable position of the axis in EU.")
+    enc_offset = Cpt(EpicsSignal, ':PLC:AxisPar:EncOffset_RBV', doc="Encoder Offset converted into actual position units.")
+    enc_scale = Cpt(EpicsSignal, ':PLC:AxisPar:EncScaling_RBV', doc="Encoder scaling numerator / denominator in EU/COUNT.")
+    pos_lag_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagEn_RBV', doc="Enable/Disable state of Position Lag Monitor.")
+    max_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMaxEn_RBV', doc="Enable/Disable state of controller static maximum limit")
+    min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV', doc="Enable/Disable state of controller static minimum limit")
 
 def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
                        value, name="", description="", overwrite=False):
@@ -37,18 +37,13 @@ def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
 
     for config in file.root.configs:
         if config.name == config_name:
-            print("found Configuration Group")
             foundConfig = True
             if axis_name not in [cfg.name for cfg in config.configs]:
                 # no PV Configuration, need to create one
                 config.configs.append(PVConfiguration(name=axis_name))
-
             for axis in config.configs:
-                print(axis.name)
-                
                 if axis.name == axis_name:
                     by_pv = axis.by_pv
-                    print("found Axis Configuration")
                     new_comp = Equals(name=name, description=description, value=value)
                     if pv in by_pv and overwrite:
                         by_pv[pv] = [new_comp]
