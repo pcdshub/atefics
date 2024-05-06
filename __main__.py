@@ -11,7 +11,7 @@ from email.message import EmailMessage
 from email.utils import make_msgid
 import optparse
 
-client_id_path = "./atefics/client.json"
+client_id_path = "/reg/g/pcds/epics-dev/nrw/ATEF/atefics/client.json"
 
 """Performs an ATEF check given a config file and sends a corresponding
 email to a list of recepients. 
