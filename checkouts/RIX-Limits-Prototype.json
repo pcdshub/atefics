@@ -706,6 +706,8 @@
             },
             {
                 "ConfigurationGroup": {
+=======
+>>>>>>> master
                     "name": "MR1K1 BEND",
                     "description": null,
                     "tags": null,
