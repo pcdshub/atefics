@@ -93,8 +93,8 @@ def run_optics_atef(config_file):
 
     if current_hash != saved_hash:
         msg['Subject'] = f'FAILED Optics Configuration'
-        content += f"The current hash: {current_hash}"
-        content += f"Does not Match saved hash: {current_hash}"
+        content += f"The current hash: {current_hash}\r\n"
+        content += f"Does not Match saved hash: {saved_hash}"
         msg.set_content(content)
         send_email(msg)
         print("Config File failed hash control")
