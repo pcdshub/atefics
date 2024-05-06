@@ -5,7 +5,6 @@ from ophyd import Component as Cpt
 from ophyd import Device, EpicsSignal 
 from pcdsdevices.interface import BaseInterface  
 import apischema
-import hashlib
 
 class OpticsHard(BaseInterface, Device):                                                                                                    
     pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV')                                                                      
