@@ -1,8 +1,9 @@
-import sys, os.path, hashlib
+import sys, os.path, hashlib, os
 import smtplib, ssl
 import json
 import apischema
 import asyncio
+import errno
 
 from atef.config import ConfigurationFile, PreparedFile
 from atef.enums import Severity
@@ -25,8 +26,9 @@ def FilePathUtil(config_file):
     elif os.path.isfile("./atefics/checkouts/" + config_file):
         return "./atefics/checkouts/" + config_file
     else:
-        print(f"{config_file} does not exist")
-        sys.exit(-1)
+        raise FileNotFoundError(
+            errno.ENOENT, os.strerror(errno.ENOENT), config_file
+        )
 
 def RequireOptions(options, *args):
   missing = [arg for arg in args if getattr(options, arg) is None]
@@ -40,7 +42,7 @@ def SetupOptionParser():
     parser.add_option('--run_atefics',
                     action='store_true',
                     dest="run_atefics",
-                    help='run an atef check on a configuratin file')
+                    help='run an atef check on a configuration file')
     parser.add_option('--config_file',
                     dest='config_file',
                     help='absolute path or filename in checkouts')

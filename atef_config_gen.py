@@ -58,56 +58,13 @@ def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis
     """ Add a new PVConfiguration in the ConfigurationGroup with name `mirror` """
     hardstop_config = OpticsHard(base_pv_axis, name='')
     signals = hardstop_config.get_instantiated_signals()
+
     for signal in signals:
-        if signal[1].name == "_pos_lag_time":
-            name = axis + " Pos Lag Time"
-            description = "Maximum allowable duration outside of maximum position lag value in seconds."
-            value = hardstop_config.pos_lag_time.get()
-            pv = hardstop_config.pos_lag_time.pvname
+        name = signal[1].name[1:]
+        description = getattr(OpticsHard, signal[1].name[1:]).doc
+        value = getattr(hardstop_config, signal[1].name[1:]).get()
+        pv = getattr(hardstop_config, signal[1].name[1:]).pvname
 
-        elif signal[1].name == "_pos_lag_mon_val":
-            name = axis + " Pos Lag Monitoring Val"
-            description = "Maximum magnitude of position lag in EU."
-            value = hardstop_config.pos_lag_mon_val.get()
-            pv = hardstop_config.pos_lag_mon_val.pvname
-
-        elif signal[1].name == "_plc_soft_limit_min":
-            name = axis + " PLC Soft Limit Min"
-            description = "Minimum commandable position of the axis in EU."
-            value = hardstop_config.plc_soft_limit_min.get()
-            pv = hardstop_config.plc_soft_limit_min.pvname
-
-        elif signal[1].name == "_plc_soft_limit_max":
-            name = axis + " PLC Soft Limit Max"
-            description = "Maximum commandable position of the axis in EU."
-            value = hardstop_config.plc_soft_limit_max.get()
-            pv = hardstop_config.plc_soft_limit_max.pvname
-
-        elif signal[1].name == "_enc_offset":
-            name = axis + " Encoder Offset"
-            description = "Encoder Offset converted into actual position units."
-            value = hardstop_config.enc_offset.get()
-            pv = hardstop_config.enc_offset.pvname
-        elif signal[1].name == "_enc_scale":
-            name = axis + " Enc Scale"
-            description = "Encoder scaling numerator / denominator in EU/COUNT."
-            value = hardstop_config.enc_scale.get()
-            pv = hardstop_config.enc_scale.pvname
-        elif signal[1].name == "_pos_lag_enabled":
-            name= axis + " Pos Lag Mon Enabled"
-            description  = "Enable/Disable state of Position Lag Monitor."
-            value = hardstop_config.pos_lag_enabled.get()
-            pv = hardstop_config.pos_lag_enabled.pvname
-        elif signal[1].name == "_max_plc_limit_enabled":
-            name = axis + " Max PLC Limit Enabled"
-            description = "Enable/Disable state of controller static maximum limit"
-            value = hardstop_config.max_plc_limit_enabled.get()
-            pv = hardstop_config.max_plc_limit_enabled.pvname
-        elif signal[1].name == "_min_plc_limit_enabled":
-            name = axis + " Min PLC Limit Enabled"
-            description = "Enable/Disable state of controller static minimum limit"
-            value = hardstop_config.min_plc_limit_enabled.get()
-            pv = hardstop_config.min_plc_limit_enabled.pvname
         addEqualComparison(file, mirror, axis, pv, value, name, description, overwrite)
 
 # grab base config file
