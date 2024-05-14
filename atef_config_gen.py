@@ -6,17 +6,17 @@ from ophyd import Device, EpicsSignal
 from pcdsdevices.interface import BaseInterface  
 import apischema
 
-class OpticsHard(BaseInterface, Device):                                                                                                    
-    pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV')                                                                      
-    pos_lag_mon_val = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagVal_RBV')     
-    plc_soft_limit_min = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMin_RBV' )
-    plc_soft_limit_max = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMax_RBV')
-    enc_offset = Cpt(EpicsSignal, ':PLC:AxisPar:EncOffset_RBV')
-    enc_scale = Cpt(EpicsSignal, ':PLC:AxisPar:EncScaling_RBV')
-    pos_lag_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagEn_RBV')
-    max_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMaxEn_RBV')
-    min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV')
 
+class OpticsHard(BaseInterface, Device):                                                                                                    
+    pos_lag_time = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagTime_RBV', doc="Maximum allowable duration outside of maximum position lag value in seconds.")
+    pos_lag_mon_val = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagVal_RBV', doc="Maximum magnitude of position lag in EU.")     
+    plc_soft_limit_min = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMin_RBV', doc="Minimum commandable position of the axis in EU." )
+    plc_soft_limit_max = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMax_RBV', doc="Maximum commandable position of the axis in EU.")
+    enc_offset = Cpt(EpicsSignal, ':PLC:AxisPar:EncOffset_RBV', doc="Encoder Offset converted into actual position units.")
+    enc_scale = Cpt(EpicsSignal, ':PLC:AxisPar:EncScaling_RBV', doc="Encoder scaling numerator / denominator in EU/COUNT.")
+    pos_lag_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:PosLagEn_RBV', doc="Enable/Disable state of Position Lag Monitor.")
+    max_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMaxEn_RBV', doc="Enable/Disable state of controller static maximum limit")
+    min_plc_limit_enabled = Cpt(EpicsSignal, ':PLC:AxisPar:SLimMinEn_RBV', doc="Enable/Disable state of controller static minimum limit")
 
 def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
                        value, name="", description="", overwrite=False):
@@ -37,18 +37,13 @@ def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
 
     for config in file.root.configs:
         if config.name == config_name:
-            print("found Configuration Group")
             foundConfig = True
             if axis_name not in [cfg.name for cfg in config.configs]:
                 # no PV Configuration, need to create one
                 config.configs.append(PVConfiguration(name=axis_name))
-
             for axis in config.configs:
-                print(axis.name)
-                
                 if axis.name == axis_name:
                     by_pv = axis.by_pv
-                    print("found Axis Configuration")
                     new_comp = Equals(name=name, description=description, value=value)
                     if pv in by_pv and overwrite:
                         by_pv[pv] = [new_comp]
@@ -63,56 +58,13 @@ def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis
     """ Add a new PVConfiguration in the ConfigurationGroup with name `mirror` """
     hardstop_config = OpticsHard(base_pv_axis, name='')
     signals = hardstop_config.get_instantiated_signals()
+
     for signal in signals:
-        if signal[1].name == "_pos_lag_time":
-            name = axis + " Pos Lag Time"
-            description = "Maximum allowable duration outside of maximum position lag value in seconds."
-            value = hardstop_config.pos_lag_time.get()
-            pv = hardstop_config.pos_lag_time.pvname
+        name = signal[1].name[1:]
+        description = getattr(OpticsHard, signal[1].name[1:]).doc
+        value = getattr(hardstop_config, signal[1].name[1:]).get()
+        pv = getattr(hardstop_config, signal[1].name[1:]).pvname
 
-        elif signal[1].name == "_pos_lag_mon_val":
-            name = axis + " Pos Lag Monitoring Val"
-            description = "Maximum magnitude of position lag in EU."
-            value = hardstop_config.pos_lag_mon_val.get()
-            pv = hardstop_config.pos_lag_mon_val.pvname
-
-        elif signal[1].name == "_plc_soft_limit_min":
-            name = axis + " PLC Soft Limit Min"
-            description = "Minimum commandable position of the axis in EU."
-            value = hardstop_config.plc_soft_limit_min.get()
-            pv = hardstop_config.plc_soft_limit_min.pvname
-
-        elif signal[1].name == "_plc_soft_limit_max":
-            name = axis + " PLC Soft Limit Max"
-            description = "Maximum commandable position of the axis in EU."
-            value = hardstop_config.plc_soft_limit_max.get()
-            pv = hardstop_config.plc_soft_limit_max.pvname
-
-        elif signal[1].name == "_enc_offset":
-            name = axis + " Encoder Offset"
-            description = "Encoder Offset converted into actual position units."
-            value = hardstop_config.enc_offset.get()
-            pv = hardstop_config.enc_offset.pvname
-        elif signal[1].name == "_enc_scale":
-            name = axis + " Enc Scale"
-            description = "Encoder scaling numerator / denominator in EU/COUNT."
-            value = hardstop_config.enc_scale.get()
-            pv = hardstop_config.enc_scale.pvname
-        elif signal[1].name == "_pos_lag_enabled":
-            name= axis + " Pos Lag Mon Enabled"
-            description  = "Enable/Disable state of Position Lag Monitor."
-            value = hardstop_config.pos_lag_enabled.get()
-            pv = hardstop_config.pos_lag_enabled.pvname
-        elif signal[1].name == "_max_plc_limit_enabled":
-            name = axis + " Max PLC Limit Enabled"
-            description = "Enable/Disable state of controller static maximum limit"
-            value = hardstop_config.max_plc_limit_enabled.get()
-            pv = hardstop_config.max_plc_limit_enabled.pvname
-        elif signal[1].name == "_min_plc_limit_enabled":
-            name = axis + " Min PLC Limit Enabled"
-            description = "Enable/Disable state of controller static minimum limit"
-            value = hardstop_config.min_plc_limit_enabled.get()
-            pv = hardstop_config.min_plc_limit_enabled.pvname
         addEqualComparison(file, mirror, axis, pv, value, name, description, overwrite)
 
 # grab base config file
@@ -120,7 +72,7 @@ file = ConfigurationFile()
 file.root.name = "RIX Beamline"
 
 # add config group for each mirror
-for mirror_name in ['MR1K1 BEND', 'MR2K2 FLAT', 'MR3K2 KBH']:
+for mirror_name in ['SP1K1 MONO', 'MR1K1 BEND', 'MR2K2 FLAT', 'MR3K2 KBH']:
     file.root.configs.append(ConfigurationGroup(name=mirror_name))
 
 addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_PI", "G_PI", True) 
