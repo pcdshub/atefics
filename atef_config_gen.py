@@ -64,7 +64,8 @@ def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis
         description = getattr(OpticsHard, signal[1].name[1:]).doc
         value = getattr(hardstop_config, signal[1].name[1:]).get()
         pv = getattr(hardstop_config, signal[1].name[1:]).pvname
-
+        if name == "pos_lag_enabled" or name == "max_plc_limit_enabled" or name == "min_plc_limit_enabled":
+            value = 1
         addEqualComparison(file, mirror, axis, pv, value, name, description, overwrite)
 
 def generate_config_file(mirrors):
@@ -94,4 +95,31 @@ rix_mirrors = {
     "MR4K2 KBV":["X", "Y", "PITCH", "BEND:US", "BEND:DS"]
 }
 
-generate_config_file(rix_mirrors)
+tmo_mirrors = {
+    "config_name": "TMO Optics EPS 18.09.24",
+    "MR1K4 SOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH"],
+    "MR2K4 KBO":["X", "Y", "PITCH", "BEND:US", "BEND:DS"],
+    "MR3K4 KBO":["X", "Y", "PITCH", "BEND:US", "BEND:DS"],
+    "MR4K4 KBO":["X", "Y", "Z", "PITCH"],
+    "MR5K4 KBO":["X", "Y", "Z", "PITCH"]
+}
+
+lfe_mirrors = {
+    "config_name": "LFE Optics EPS 18.09.24",
+    "MR1L0 HOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH", "BENDER"],
+    "MR2L0 HOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH", "BENDER"]
+}
+
+txi_mirrors = {
+    "config_name": "TXI Optics EPS 18.09.24",
+    "MR1K3 SOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH"],
+    "MR2K3 SOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH"],
+    "MR1L1 HOMS":["YUP", "YDWN", "XUP", "XDWN", "PITCH"],
+}
+
+
+
+
+#generate_config_file(tmo_mirrors)
+#generate_config_file(rix_mirrors)
+generate_config_file(lfe_mirrors)
