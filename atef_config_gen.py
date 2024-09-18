@@ -54,7 +54,7 @@ def addEqualComparison(file: ConfigurationFile, config_name, axis_name, pv,
             break
     
 
-def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis, overwrite=False):
+def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis, overwrite=True):
     """ Add a new PVConfiguration in the ConfigurationGroup with name `mirror` """
     hardstop_config = OpticsHard(base_pv_axis, name='')
     signals = hardstop_config.get_instantiated_signals()
@@ -67,31 +67,31 @@ def addCurrentAxisParameters(file: ConfigurationFile, mirror, base_pv_axis, axis
 
         addEqualComparison(file, mirror, axis, pv, value, name, description, overwrite)
 
+def generate_config_file(mirrors):
+    file = ConfigurationFile()
+    file.root.name = mirrors["config_name"]
+    for mirror_name in mirrors.keys():
+        if mirror_name == "config_name":
+            continue
+        file.root.configs.append(ConfigurationGroup(name=mirror_name))
+        for axis in mirrors[mirror_name]:
+            pv = mirror_name.replace(" ", ":") + ":MMS:" + axis
+            print(pv)
+            addCurrentAxisParameters(file, mirror_name, pv, axis) 
+    with open("scratch.json", "w") as fd:
+        json.dump(apischema.serialize(ConfigurationFile, file), fd, indent=4)
+
+
 # grab base config file
-file = ConfigurationFile()
-file.root.name = "RIX Beamline"
 
-# add config group for each mirror
-for mirror_name in ['SP1K1 MONO', 'MR1K1 BEND', 'MR2K2 FLAT', 'MR3K2 KBH']:
-    file.root.configs.append(ConfigurationGroup(name=mirror_name))
+rix_mirrors = {
+    "config_name": "RIX Optics EPS 18.09.24",
+    "SP1K1 MONO":["G_PI", "G_H", "M_PI", "M_H"],
+    "MR1K1 BEND":["XUP", "YUP", "PITCH"],
+    "MR1K2 SWITCH":["YLEFT","YRIGHT", "XUP", "XDWN","PITCH"],
+    "MR2K2 FLAT": ["X","Y","PITCH"],
+    "MR3K2 KBH":["X", "Y", "PITCH", "BEND:US", "BEND:DS"],
+    "MR4K2 KBV":["X", "Y", "PITCH", "BEND:US", "BEND:DS"]
+}
 
-addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_PI", "G_PI", True) 
-addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:G_H", "G_H", True) 
-addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_PI", "M_PI", True) 
-addCurrentAxisParameters(file, "SP1K1 MONO", "SP1K1:MONO:MMS:M_H", "M_H", True) 
-
-addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:XUP", "XUP", True) 
-addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:YUP", "YUP", True) 
-addCurrentAxisParameters(file, "MR1K1 BEND", "MR1K1:BEND:MMS:PITCH", "Pitch", True) 
-
-addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:X", "X", True) 
-addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:Y", "Y", True) 
-addCurrentAxisParameters(file, "MR2K2 FLAT", "MR2K2:FLAT:MMS:PITCH", "Pitch", True) 
-
-addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:X", "X", True) 
-addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:Y", "Y", True) 
-addCurrentAxisParameters(file, "MR3K2 KBH", "MR3K2:KBH:MMS:PITCH", "Pitch", True) 
-
-    
-with open("scratch.json", "w") as fd:
-    json.dump(apischema.serialize(ConfigurationFile, file), fd, indent=4)
+generate_config_file(rix_mirrors)
