@@ -1,0 +1,14 @@
+# default group
+* @pcdshub/optics-sme 
+
+# language-specific group(s)
+## PYTHON files
+*.py @pcdshub/python-reviewers @pcdshub/optics-sme 
+*.pyi @pcdshub/python-reviewers @pcdshub/optics-sme 
+*.pyc @pcdshub/python-reviewers @pcdshub/optics-sme 
+*.pyw @pcdshub/python-reviewers @pcdshub/optics-sme 
+*.pyx @pcdshub/python-reviewers @pcdshub/optics-sme 
+*.pyd @pcdshub/python-reviewers @pcdshub/optics-sme 
+
+# github folder holds administrative files
+.github/** @pcdshub/software-admin
